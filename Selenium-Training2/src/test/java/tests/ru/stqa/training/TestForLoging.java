@@ -24,12 +24,13 @@ public class TestForLoging {
     public void logIn() {
         driver.get("http://localhost/litecart/en/");
         driver.findElement(By.name("email")).sendKeys("elena.kleymenova@raiffeisen.ru");
-        driver.findElement(By.name("password")).sendKeys("test");
+        driver.findElement(By.name("password")).sendKeys("12345");
+        driver.findElement(By.name("login")).click();
 
     }
-    @AfterEach
+    /*@AfterEach
     public void stop() {
         driver.quit();
         driver = null;
-    }
+    }*/
 }
