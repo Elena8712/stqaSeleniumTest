@@ -28,9 +28,9 @@ public class TestForLoging {
         driver.findElement(By.name("login")).click();
 
     }
-    /*@AfterEach
+    @AfterEach
     public void stop() {
         driver.quit();
         driver = null;
-    }*/
+    }
 }
