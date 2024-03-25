@@ -22,9 +22,9 @@ public class TestForLoging {
     }
     @Test
     public void logIn() {
-        driver.get("http://localhost/litecart/en/");
-        driver.findElement(By.name("email")).sendKeys("elena.kleymenova@raiffeisen.ru");
-        driver.findElement(By.name("password")).sendKeys("12345");
+        driver.get("http://localhost/litecart/admin/");
+        driver.findElement(By.name("username")).sendKeys("admin");
+        driver.findElement(By.name("password")).sendKeys("admin");
         driver.findElement(By.name("login")).click();
 
     }
