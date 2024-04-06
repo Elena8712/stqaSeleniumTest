@@ -1,5 +1,6 @@
 package tests.ru.stqa.training;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
@@ -54,5 +55,11 @@ public class TestForEditGeoZone {
 
             driver.findElement(By.cssSelector("a[href='http://localhost/litecart/admin/?app=geo_zones&doc=geo_zones']")).click();
         }
+    }
+
+    @AfterEach
+    public void stop() {
+        driver.quit();
+        driver = null;
     }
 }
