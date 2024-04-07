@@ -5,7 +5,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -92,31 +91,31 @@ public class TestForProductsFireFox {
                                     (By.xpath("//div[@id='" + boxId + "']/div/ul/li/a[@title='" + title + "' and @class='link']"))
                             .click();
 
-                    var colorRegProdPage = driver.findElement(By.xpath("//div[position()=2]/s[@class='regular-price']")).getCssValue("color");
+                    var colorRegProdPage = driver.findElement(By.xpath("//s[@class='regular-price']")).getCssValue("color");
                     var colorRegProdPageSub = colorRegProdPage.substring(4).split(", ");
                     assertEquals(colorRegProdPageSub[0], colorRegProdPageSub[1], colorRegProdPageSub[2]);
 
-                    var decorRegProdPage = driver.findElement(By.xpath("//div[position()=2]/s[@class='regular-price']")).getCssValue("text-decoration");
+                    var decorRegProdPage = driver.findElement(By.xpath("//s[@class='regular-price']")).getCssValue("text-decoration");
                     var decorRegProdPageSub = decorRegProdPage.substring(0, 12);
                     assertEquals(decorRegProdPageSub, "line-through");
 
-                    var colorCampProdPage = driver.findElement(By.xpath("//div[position()=2]/strong[@class='campaign-price']")).getCssValue("color");
+                    var colorCampProdPage = driver.findElement(By.xpath("//strong[@class='campaign-price']")).getCssValue("color");
                     var colorCampProdPageSub = colorCampProdPage.substring(4).split(", ");
                     assertEquals("0", colorCampProdPageSub[1], colorCampProdPageSub[2]);
 
-                    var decorCampProdPage = driver.findElement(By.xpath("//div[position()=2]/strong[@class='campaign-price']")).getCssValue("font-weight");
+                    var decorCampProdPage = driver.findElement(By.xpath("//strong[@class='campaign-price']")).getCssValue("font-weight");
                     assertEquals(decorCampProdPage, "700");
 
-                    var sizeRegProdPage = driver.findElement(By.xpath("//div[position()=2]/s[@class='regular-price']")).getCssValue("font-size").split("px");
-                    var sizeCampProdPage = driver.findElement(By.xpath("//div[position()=2]/strong[@class='campaign-price']")).getCssValue("font-size").split("px");
+                    var sizeRegProdPage = driver.findElement(By.xpath("//s[@class='regular-price']")).getCssValue("font-size").split("px");
+                    var sizeCampProdPage = driver.findElement(By.xpath("//strong[@class='campaign-price']")).getCssValue("font-size").split("px");
 
                     double sizeRegProdPageDouble = Double.parseDouble(sizeRegProdPage[0]);
                     double sizeCampProdPageDouble = Double.parseDouble(sizeCampProdPage[0]);
                     assertTrue(sizeCampProdPageDouble > sizeRegProdPageDouble);
 
 
-                    assertEquals(priceReg, driver.findElement(By.xpath("//div[position()=2]/s[@class='regular-price']")).getText());
-                    assertEquals(campPrice, driver.findElement(By.xpath("//div[position()=2]/strong[@class='campaign-price']")).getText());
+                    assertEquals(priceReg, driver.findElement(By.xpath("//s[@class='regular-price']")).getText());
+                    assertEquals(campPrice, driver.findElement(By.xpath("//strong[@class='campaign-price']")).getText());
                     assertEquals(title, driver.findElement(By.xpath("//h1")).getText());
                 } else {
                     var price = driver.findElement(By.xpath("//div[@id='" + boxId + "']/div/ul/li/a[@title='" + title + "' and @class='link']/div[@class='price-wrapper']/span")).getText();
