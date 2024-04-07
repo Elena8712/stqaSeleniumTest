@@ -6,14 +6,16 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class TestForProducts {
+public class TestForProductsFireFox {
     private WebDriver driver;
     private WebDriverWait wait;
 
@@ -24,7 +26,7 @@ public class TestForProducts {
 
     @BeforeEach
     public void start() {
-        driver = new ChromeDriver();
+        driver = new FirefoxDriver();
         wait = new WebDriverWait(driver, Duration.ofMillis(10000));
     }
 
@@ -43,8 +45,8 @@ public class TestForProducts {
 
         for (var y = 0; y < boxArray.length; y++) {
             var boxId = boxArray[y];
-            var prodBoxCount = driver.findElements(By.xpath("//div[@id='" + boxId + "']/div/ul/li/a")).size();
-            var prodBox = driver.findElements(By.xpath("//div[@id='" + boxId + "']/div/ul/li/a"));
+            var prodBoxCount = driver.findElements(By.xpath("//div[@id='" + boxId + "']/div/ul/li/a[@class='link']")).size();
+            var prodBox = driver.findElements(By.xpath("//div[@id='" + boxId + "']/div/ul/li/a[@class='link']"));
 
             String[] prodBoxArray = new String[prodBox.size()];
 
@@ -63,7 +65,7 @@ public class TestForProducts {
                     var campPrice = driver.findElement(By.xpath("//div[@id='" + boxId + "']/div/ul/li/a[@title='" + title + "' and @class='link']/div[@class='price-wrapper']/strong")).getText();
 
                     var colorReg = driver.findElement(By.xpath("//div[@id='" + boxId + "']/div/ul/li/a[@title='" + title + "' and @class='link']/div[@class='price-wrapper']/s")).getCssValue("color");
-                    var colorRegSub = colorReg.substring(5).split(", ");
+                    var colorRegSub = colorReg.substring(4).split(", ");
                     assertEquals(colorRegSub[0], colorRegSub[1], colorRegSub[2]);
 
                     var decorReg = driver.findElement(By.xpath("//div[@id='" + boxId + "']/div/ul/li/a[@title='" + title + "' and @class='link']/div[@class='price-wrapper']/s")).getCssValue("text-decoration");
@@ -72,11 +74,11 @@ public class TestForProducts {
                     assertEquals(decorRegSub, "line-through");
 
                     var colorCamp = driver.findElement(By.xpath("//div[@id='" + boxId + "']/div/ul/li/a[@title='" + title + "' and @class='link']/div[@class='price-wrapper']/strong")).getCssValue("color");
-                    var colorCampSub = colorCamp.substring(5).split(", ");
+                    var colorCampSub = colorCamp.substring(4).split(", ");
                     assertEquals("0", colorCampSub[1], colorCampSub[2]);
 
                     var decorCamp = driver.findElement(By.xpath("//div[@id='" + boxId + "']/div/ul/li/a[@title='" + title + "' and @class='link']/div[@class='price-wrapper']/strong")).getCssValue("font-weight");
-                    assertEquals(decorCamp, "700");
+                    assertEquals(decorCamp, "900");
 
                     var sizeReg = driver.findElement(By.xpath("//div[@id='" + boxId + "']/div/ul/li/a[@title='" + title + "' and @class='link']/div[@class='price-wrapper']/s")).getCssValue("font-size").split("px");
                     var sizeCamp = driver.findElement(By.xpath("//div[@id='" + boxId + "']/div/ul/li/a[@title='" + title + "' and @class='link']/div[@class='price-wrapper']/strong")).getCssValue("font-size").split("px");
@@ -91,7 +93,7 @@ public class TestForProducts {
                             .click();
 
                     var colorRegProdPage = driver.findElement(By.xpath("//div[position()=2]/s[@class='regular-price']")).getCssValue("color");
-                    var colorRegProdPageSub = colorRegProdPage.substring(5).split(", ");
+                    var colorRegProdPageSub = colorRegProdPage.substring(4).split(", ");
                     assertEquals(colorRegProdPageSub[0], colorRegProdPageSub[1], colorRegProdPageSub[2]);
 
                     var decorRegProdPage = driver.findElement(By.xpath("//div[position()=2]/s[@class='regular-price']")).getCssValue("text-decoration");
@@ -99,7 +101,7 @@ public class TestForProducts {
                     assertEquals(decorRegProdPageSub, "line-through");
 
                     var colorCampProdPage = driver.findElement(By.xpath("//div[position()=2]/strong[@class='campaign-price']")).getCssValue("color");
-                    var colorCampProdPageSub = colorCampProdPage.substring(5).split(", ");
+                    var colorCampProdPageSub = colorCampProdPage.substring(4).split(", ");
                     assertEquals("0", colorCampProdPageSub[1], colorCampProdPageSub[2]);
 
                     var decorCampProdPage = driver.findElement(By.xpath("//div[position()=2]/strong[@class='campaign-price']")).getCssValue("font-weight");
@@ -139,7 +141,4 @@ public class TestForProducts {
         driver.quit();
         driver = null;
     }
-
 }
-
-
