@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.nio.file.Path;
 import java.time.Duration;
+import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -36,6 +37,15 @@ public class TestForAddNewProduct {
         }
     }
 
+    public String generateRandomHexString(int length){
+        Random r = new Random();
+        StringBuffer sb = new StringBuffer();
+        while(sb.length() < length){
+            sb.append(Integer.toHexString(r.nextInt()));
+        }
+        return sb.toString().substring(0, length);
+    }
+
 
     @BeforeEach
     public void start() {
@@ -44,13 +54,13 @@ public class TestForAddNewProduct {
     }
 
     @Test
-    public void logIn() {
+    public void logIn() throws InterruptedException {
         driver.get("http://localhost/litecart/admin/");
         driver.findElement(By.name("username")).sendKeys("admin");
         driver.findElement(By.name("password")).sendKeys("admin");
         driver.findElement(By.name("login")).click();
 
-        var name = "Test Duck";
+        var name = generateRandomHexString(8);
 
         driver.findElement(By.xpath("//span[contains(., 'Catalog')]")).click();
         driver.findElement(By.xpath("//a[@href='http://localhost/litecart/admin/?category_id=0&app=catalog&doc=edit_product']")).click();
@@ -69,7 +79,6 @@ public class TestForAddNewProduct {
 
         String str = "src/main/resources/DuckCreative.jpg";
         Path path = Path.of(str).toAbsolutePath();
-        //System.out.println(path);
         driver.findElement(By.xpath("//input[@type='file']")).sendKeys(path.toString());
 
         driver.findElement(By.xpath("//input[@name='date_valid_from']")).sendKeys("10042024");
