@@ -55,7 +55,7 @@ public class TestForCart {
         var arrayButtonRemSize = arrayButtonRemove.size();
 
 
-            for(var i = 0; i < 3; i++) {
+            for(var i = 0; i < arrayButtonRemSize; i++) {
                 var tr = arrayButtonRemSize + 1;
                 var tableElement = driver.findElement(By.xpath("//table[@class='dataTable rounded-corners']/tbody/tr[" + tr + "]"));
                 driver.findElement(By.xpath("//button[@value='Remove']")).click();
